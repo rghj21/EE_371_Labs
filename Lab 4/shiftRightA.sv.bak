@@ -1,0 +1,4 @@
+module shiftRightA(inputA);
+	input logic [8:0] inputA;
+
+endmodule

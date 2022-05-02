@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at bitCounting.sv(26): always construct contains both blocking and non-blocking assignments File: C:/Users/Andrew/Downloads/Lab 4-20220501T211732Z-001/Lab 4/bitCounting.sv Line: 26

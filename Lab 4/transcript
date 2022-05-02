@@ -1,0 +1,393 @@
+# Reading C:/intelFPGA_lite/17.0/modelsim_ase/tcl/vsim/pref.tcl
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:15:43 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:15:43 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:15:43 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:15:43 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:15:43 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:15:43 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:15:43 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:15:43 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:15:43 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:15:43 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:15:43 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# ** Error: (vish-4014) No objects found matching '/shiftRightA_testbench/dut/loadA'.
+# Executing ONERROR command at macro ./shiftRightA.do line 3
+# ** Error: (vish-4014) No objects found matching '/shiftRightA_testbench/dut/enabler'.
+# Executing ONERROR command at macro ./shiftRightA.do line 4
+# ** Error: (vish-4014) No objects found matching '/shiftRightA_testbench/dut/inputA'.
+# Executing ONERROR command at macro ./shiftRightA.do line 5
+# ** Error: (vish-4014) No objects found matching '/shiftRightA_testbench/dut/currA'.
+# Executing ONERROR command at macro ./shiftRightA.do line 6
+# ** Error: (vish-4014) No objects found matching '/shiftRightA_testbench/dut/out'.
+# Executing ONERROR command at macro ./shiftRightA.do line 7
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+add wave -position end  sim:/bitCounting_testbench/CLOCK_PERIOD
+add wave -position end  sim:/bitCounting_testbench/in
+add wave -position end  sim:/bitCounting_testbench/reset
+add wave -position end  sim:/bitCounting_testbench/clk
+add wave -position end  sim:/bitCounting_testbench/start
+add wave -position end  sim:/bitCounting_testbench/result
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf {C:/Users/Andrew/Downloads/Lab 4-20220501T211732Z-001/Lab 4/bitCounting.do}
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:05 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:17:05 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:05 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:17:05 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:05 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:17:05 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:05 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:17:05 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:05 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:17:05 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 16:17:23 on May 01,2022, Elapsed time: 0:01:40
+# Errors: 15, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:17:23 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# ** Note: $stop    : ./bitCounting.sv(66)
+#    Time: 350 ps  Iteration: 1  Instance: /bitCounting_testbench
+# Break in Module bitCounting_testbench at ./bitCounting.sv line 66
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:28 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:17:28 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:28 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:17:28 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:28 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:17:28 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:28 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:17:28 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:17:28 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:17:28 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 16:17:29 on May 01,2022, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:17:29 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# ** Note: $stop    : ./bitCounting.sv(66)
+#    Time: 350 ps  Iteration: 1  Instance: /bitCounting_testbench
+# Break in Module bitCounting_testbench at ./bitCounting.sv line 66
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:18:15 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:18:15 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:18:15 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:18:15 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:18:15 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:18:15 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:18:15 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:18:15 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:18:15 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:18:15 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 16:18:18 on May 01,2022, Elapsed time: 0:00:49
+# Errors: 0, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:18:18 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# ** Note: $stop    : ./bitCounting.sv(66)
+#    Time: 10350 ps  Iteration: 1  Instance: /bitCounting_testbench
+# Break in Module bitCounting_testbench at ./bitCounting.sv line 66
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:19:04 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:19:04 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:19:04 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:19:04 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:19:04 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:19:04 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:19:04 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:19:04 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:19:04 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:19:04 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 16:19:06 on May 01,2022, Elapsed time: 0:00:48
+# Errors: 0, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:19:06 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# ** Note: $stop    : ./bitCounting.sv(66)
+#    Time: 10350 ps  Iteration: 1  Instance: /bitCounting_testbench
+# Break in Module bitCounting_testbench at ./bitCounting.sv line 66
+add wave -position end  sim:/bitCounting_testbench/dut/doneFlag
+add wave -position end  sim:/bitCounting_testbench/dut/A
+add wave -position end  sim:/bitCounting_testbench/dut/ps
+add wave -position end  sim:/bitCounting_testbench/dut/ns
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf {C:/Users/Andrew/Downloads/Lab 4-20220501T211732Z-001/Lab 4/bitCounting.do}
+write format wave -window .main_pane.wave.interior.cs.body.pw.wf {C:/Users/Andrew/Downloads/Lab 4-20220501T211732Z-001/Lab 4/bitCounting.do}
+do runlab.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:20:40 on May 01,2022
+# vlog -reportprogress 300 ./DE1_SoC.sv 
+# -- Compiling module DE1_SoC
+# 
+# Top level modules:
+# 	DE1_SoC
+# End time: 16:20:40 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:20:40 on May 01,2022
+# vlog -reportprogress 300 ./task1.sv 
+# -- Compiling module task1
+# 
+# Top level modules:
+# 	task1
+# End time: 16:20:40 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:20:40 on May 01,2022
+# vlog -reportprogress 300 ./shiftRightA.sv 
+# -- Compiling module shiftRightA
+# -- Compiling module shiftRightA_testbench
+# 
+# Top level modules:
+# 	shiftRightA_testbench
+# End time: 16:20:40 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:20:40 on May 01,2022
+# vlog -reportprogress 300 ./task1HexDisplay.sv 
+# -- Compiling module task1HexDisplay
+# 
+# Top level modules:
+# 	task1HexDisplay
+# End time: 16:20:40 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 16:20:40 on May 01,2022
+# vlog -reportprogress 300 ./bitCounting.sv 
+# -- Compiling module bitCounting
+# -- Compiling module bitCounting_testbench
+# 
+# Top level modules:
+# 	bitCounting_testbench
+# End time: 16:20:40 on May 01,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# End time: 16:20:41 on May 01,2022, Elapsed time: 0:01:35
+# Errors: 0, Warnings: 0
+# vsim -voptargs=""+acc"" -t 1ps -lib work bitCounting_testbench 
+# Start time: 16:20:41 on May 01,2022
+# Loading sv_std.std
+# Loading work.bitCounting_testbench
+# Loading work.bitCounting
+# .main_pane.wave.interior.cs.body.pw.wf
+# .main_pane.structure.interior.cs.body.struct
+# .main_pane.objects.interior.cs.body.tree
+# ** Note: $stop    : ./bitCounting.sv(66)
+#    Time: 10350 ps  Iteration: 1  Instance: /bitCounting_testbench
+# Break in Module bitCounting_testbench at ./bitCounting.sv line 66
+# End time: 16:25:36 on May 01,2022, Elapsed time: 0:04:55
+# Errors: 0, Warnings: 0

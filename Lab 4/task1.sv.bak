@@ -1,0 +1,8 @@
+module task1(clk, reset, start, inputA, result);
+	input logic clk, reset, start;
+	input logic [8:0] inputA;
+	output logic [3:0] result;
+	
+	enum {S1, S2, S3} ps, ns;
+	
+endmodule

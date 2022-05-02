@@ -1,0 +1,43 @@
+module bitCounting(in, start, reset, clk, result);
+	input logic [7:0] in;
+	input logic reset, clk, s;
+	output logic [3;0] result;
+	logic doneFlag;
+	logic [7:0] A;
+	enum {S1, S2, S3} ps, ns;
+	
+	always_comb begin
+		case(ps)
+			S1: 	if (start)
+						ns = S2;
+					else 
+						ns = S1;
+			S2: 	if (doneFlag) 
+						ns = S3;
+					else
+						ns = S2;
+			S3: 	if (start)
+						ns = S3;
+					else
+						ns = S1;
+		endcase
+	end
+	
+	always_ff @(posedge clk) begin
+		if (reset) 
+			ps <= S1;
+		else 
+			ps <= ns;
+		case(ps)
+			S1: begin
+				A <= in;
+				result <= 0;
+				doneFlag <= 0;
+			S2: begin
+				if(A == 0)
+					doneFlag = 1;
+				else if (A[0] == 0)
+				
+				else
+					result <= result + 1;
+					

@@ -1,0 +1,177 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Otaku/Desktop/EE 371 Labs/Lab 4
+vbitCounting
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1651447240
+!i10b 1
+!s100 L@UXz2_n<W=AENn=`QhE82
+IkGIUefJUO@k4ZB05noQb22
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 !s105 bitCounting_sv_unit
+S1
+Z4 dC:/Users/Andrew/Downloads/Lab 4-20220501T211732Z-001/Lab 4
+Z5 w1651447139
+Z6 8./bitCounting.sv
+Z7 F./bitCounting.sv
+L0 1
+Z8 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z9 !s108 1651447240.000000
+Z10 !s107 ./bitCounting.sv|
+Z11 !s90 -reportprogress|300|./bitCounting.sv|
+!i113 1
+Z12 tCvgOpt 0
+nbit@counting
+vbitCounting_testbench
+R0
+R1
+!i10b 1
+!s100 FZN;Mj@7JOO:IckBi8d=<2
+I7M3B<Q02Xg^ohQRbAV_?h0
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 48
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+nbit@counting_testbench
+vDE1_SoC
+R0
+R1
+!i10b 1
+!s100 MgDh1i[M4BMWNOEkIDMi71
+I9hc?Ab;;^X@SMYl18Q5MA3
+R2
+!s105 DE1_SoC_sv_unit
+S1
+R4
+Z13 w1651439910
+8./DE1_SoC.sv
+F./DE1_SoC.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+!s107 ./DE1_SoC.sv|
+!s90 -reportprogress|300|./DE1_SoC.sv|
+!i113 1
+R12
+n@d@e1_@so@c
+vshiftRightA
+R0
+R1
+!i10b 1
+!s100 >a2WjQnZCB;0V=MXz]R5j3
+IWFf7F4VPL5;N1O04`fDTW0
+R2
+Z14 !s105 shiftRightA_sv_unit
+S1
+R4
+R13
+Z15 8./shiftRightA.sv
+Z16 F./shiftRightA.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+Z17 !s107 ./shiftRightA.sv|
+Z18 !s90 -reportprogress|300|./shiftRightA.sv|
+!i113 1
+R12
+nshift@right@a
+vshiftRightA_testbench
+R0
+R1
+!i10b 1
+!s100 i_:<D=goFC@T]:2cEkBg41
+Io=Y[cn^]`Q[Z>o=CT0=W21
+R2
+R14
+S1
+R4
+R13
+R15
+R16
+L0 21
+R8
+r1
+!s85 0
+31
+R9
+R17
+R18
+!i113 1
+R12
+nshift@right@a_testbench
+vtask1
+R0
+R1
+!i10b 1
+!s100 458iNnn3;8]2`7n8`FT711
+I=VAE3DBnFJJo?]6H^?`4e1
+R2
+!s105 task1_sv_unit
+S1
+R4
+w1651443247
+8./task1.sv
+F./task1.sv
+L0 2
+R8
+r1
+!s85 0
+31
+R9
+!s107 ./task1.sv|
+!s90 -reportprogress|300|./task1.sv|
+!i113 1
+R12
+vtask1HexDisplay
+R0
+R1
+!i10b 1
+!s100 C2gK5B^i]2bZR[0ndiBOc0
+I]UZ<KU_bkVEi^LDR39N?o1
+R2
+!s105 task1HexDisplay_sv_unit
+S1
+R4
+R13
+8./task1HexDisplay.sv
+F./task1HexDisplay.sv
+L0 1
+R8
+r1
+!s85 0
+31
+R9
+!s107 ./task1HexDisplay.sv|
+!s90 -reportprogress|300|./task1HexDisplay.sv|
+!i113 1
+R12
+ntask1@hex@display
