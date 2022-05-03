@@ -1,0 +1,26 @@
+module bitCountingControl(in, start, reset, clk, result, done);
+	input logic [7:0] in;
+	input logic reset, clk, start;
+	output logic [3:0] result;
+	output logic done;
+	
+	logic [7:0] A;
+	
+	enum {S1, S2, S3} ps, ns;
+	
+	always_comb begin
+		case(ps)
+			S1: 	if (start)
+						ns = S2;
+					else 
+						ns = S1;
+			S2: 	if (done) 
+						ns = S3;
+					else
+						ns = S2;
+			S3: 	if (start)
+						ns = S3;
+					else
+						ns = S1;
+		endcase
+	end

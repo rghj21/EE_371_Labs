@@ -1,0 +1,22 @@
+module bitCountingDatapath(result, 
+
+	output logic [3:0] result;
+	output logic 
+
+	always_ff @(posedge clk) begin
+			case(ps)
+				S1: 	begin
+							result <= 0;
+							done <= 0;
+							A <= in;
+						end
+				S2: 	begin
+							if(A == 0)
+								done = 1;
+							else if (A[0] == 1)
+								result <= result + 1;
+							A <= A >> 1;
+						end		
+			endcase
+		end
+endmodule

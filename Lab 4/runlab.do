@@ -9,18 +9,19 @@ vlog "./task1.sv"
 vlog "./shiftRightA.sv"
 vlog "./task1HexDisplay.sv"
 vlog "./bitCounting.sv"
-vlog "./binarySearchDatapath.sv"
+vlog "./bitCountingControl.sv"
+vlog "./bitCountingDatapath.sv"
 
 
 # Call vsim to invoke simulator
 #     Make sure the last item on the line is the name of the
 #     testbench module you want to execute.
-vsim -voptargs="+acc" -t 1ps -lib work bitCounting_testbench
+vsim -voptargs="+acc" -t 1ps -lib work bitCountingDatapath_testbench
 
 # Source the wave do file
 #     This should be the file that sets up the signal window for
 #     the module you are testing.
-do bitCounting.do
+do bitCountingDatapath.do
 
 # Set the window types
 view wave
