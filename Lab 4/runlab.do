@@ -9,6 +9,7 @@ vlog "./task1.sv"
 vlog "./shiftRightA.sv"
 vlog "./task1HexDisplay.sv"
 vlog "./bitCounting.sv"
+vlog "./binarySearchDatapath.sv"
 
 
 # Call vsim to invoke simulator
