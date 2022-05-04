@@ -1,9 +1,13 @@
+//
 module bitCounting(in, start, reset, clk, result, done);
+	// port definitions
 	input logic [7:0] in;
 	input logic reset, clk, start;
 	output logic [3:0] result;
 	output logic done;
 	logic [7:0] A;
+	
+	// define state names and variables
 	enum {S1, S2, S3} ps, ns;
 	
 	always_comb begin
@@ -21,7 +25,7 @@ module bitCounting(in, start, reset, clk, result, done);
 					else
 						ns = S1;
 		endcase
-	end
+	end // always_comb
 	
 	always_ff @(posedge clk) begin
 		if (reset) 
@@ -42,7 +46,8 @@ module bitCounting(in, start, reset, clk, result, done);
 						A <= A >> 1;
 					end		
 		endcase
-	end
+	end //always_ff
+	
 endmodule
 
 module bitCounting_testbench();

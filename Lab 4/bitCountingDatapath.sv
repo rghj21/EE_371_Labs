@@ -1,38 +1,38 @@
-module bitCountingDatapath(clk, ready, incr_result, shiftA, inputA, result, done, A_is_zero, A_is_one); 
-	input logic clk, ready, incr_result, shiftA;
-	input logic [7:0] inputA;
+module bitCountingDatapath(clk, ready, incr_result, A_is_zero, switchInput, result, done, currA); 
+	input logic clk, ready, incr_result, A_is_zero;
+	input logic [7:0] switchInput;
 	output logic [3:0] result;
-	output logic done, A_is_zero, A_is_one;
+	output logic done;
+	output logic [7:0] currA;
 
-	logic [7:0] A;
 	// datapath logic 
-	
 	always_ff @(posedge clk) begin
 		if(ready) begin
 			result <= 0;
 			done <= 0;
-			A <= inputA;
+			currA <= switchInput;
 		end
 		if(A_is_zero) begin
 			done <= 1;
 		end
 		else if(incr_result) begin
 			result <= result + 1;
-			A_is_one <= 1;
 		end
-		else if(shiftA) begin
-			A <= A >> 1;
+		else begin
+			currA <= currA >> 1;
 		end
 	end // always_ff
+	
+	
 endmodule // datapath
 
 
 module bitCountingDatapath_testbench();
-	logic clk, ready, incr_result, shiftA, done, A_is_zero, A_is_one;
-	logic [7:0] inputA;
+	logic clk, ready, incr_result, A_is_zero, done;
+	logic [7:0] switchInput, currA;
 	logic [3:0] result;
 	
-	bitCountingDatapath dut (.clk, .ready, .incr_result, .shiftA, .inputA, .result, .done, .A_is_zero, .A_is_one);
+	bitCountingDatapath dut (.clk, .ready, .incr_result, .A_is_zero, .switchInput, .result, .done, .currA); 
 	
 	parameter CLOCK_PERIOD = 100;
 	initial begin
@@ -41,17 +41,10 @@ module bitCountingDatapath_testbench();
 	end
 	
 	initial begin
-		inputA <= 8'b00100100; @(posedge clk);
-		ready <= 1;	@(posedge clk);
-		ready <= 0; @(posedge clk);
-		// testing when A[0] = 1
-		incr_result <= 1; repeat(8) @(posedge clk);
-		incr_result <= 0; @(posedge clk);
-		// testing when A[0] = 0
-		shiftA <= 1; repeat(8) @(posedge clk);
-		
-		// testing when A = 0
-		incr_result <= 1; shiftA <= 1; @(posedge clk);
+		switchInput <= 8'b00100100; @(posedge clk);
+		ready <= 1; switchInput <= 8'b00100100; @(posedge clk);
+		ready <= 0; switchInput <= 8'b00100100; @(posedge clk);
+		repeat(20) @(posedge clk);
 		$stop;
 	end
 endmodule
