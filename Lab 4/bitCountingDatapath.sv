@@ -1,4 +1,5 @@
 module bitCountingDatapath(inputA, A_zero, ready, result, done, clk);  
+	//port definitions
 	input logic A_zero, clk, ready;
 	input logic [7:0] inputA;
 	output logic [3:0] result;
@@ -18,9 +19,11 @@ module bitCountingDatapath(inputA, A_zero, ready, result, done, clk);
 			done = 1;
 		end
 		else if(A[0] == 1) begin
-			result <= result +1;
+			result <= result + 1;
 		end
-		A <= A >> 1;
+		else begin
+			A <= A >> 1;
+		end
 	end // always_ff
 endmodule // datapath
 

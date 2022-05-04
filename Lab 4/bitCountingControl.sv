@@ -31,10 +31,11 @@ module bitCountingControl(in, start, reset, clk, done, ready, A_is_zero, inputA)
 		else 
 			ps <= ns;
 	end // always_ff
-
+	
+	//output assignments
 	assign inputA = in;
 	assign ready = (ps == S1);
-	assign A_is_zero = (ps == S2);
+	assign A_is_zero = (ps == S2) & (~done);
 	
 endmodule // controller
 
