@@ -1,8 +1,12 @@
+// Hex Display module
+// takes 4-bit input 
+// outputs 6-bit HEX0-5
+// Determines what number should be displayed on HEX0 based on the 4-bit input
 module task1HexDisplay(result, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 	input logic [3:0] result;
 	output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
 	
-	// HEX1 - HEX6 are turned off
+	// HEX1 - HEX5 are turned off
 	assign HEX1 = 7'b1111111; 
 	assign HEX2 = 7'b1111111; 
 	assign HEX3 = 7'b1111111; 
@@ -24,5 +28,5 @@ module task1HexDisplay(result, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5);
 			4'b1001  : HEX0 = 7'b0010000; //9 
 			default: HEX0 = 7'b1111111; //empty
 		endcase 
-	end
+	end // always_comb
 endmodule
