@@ -1,27 +1,22 @@
-module bitCountingControl(in, start, reset, clk, done, ready, A_is_zero, inputA);
+module bitCountingControl(in, start, reset, clk, done, currA, ready, A_is_zero, incr_result, switchInput);
 	// port definitions
-	input logic [7:0] in;
+	input logic [7:0] in, currA;
 	input logic reset, clk, start, done;
-	output logic ready, A_is_zero;
-	output logic [7:0] inputA;
+	output logic ready, incr_result, A_is_zero;
+	output logic [7:0] switchInput;
 	
-	
-	enum {S1, S2, S3} ps, ns;
+	// define state names and variables
+	enum {S1, S2, S2wait, S3} ps, ns;
 	
 	always_comb begin
 		case(ps)
-			S1: 	if (start)
-						ns = S2;
-					else 
-						ns = S1;
-			S2: 	if (done) 
-						ns = S3;
-					else
-						ns = S2;
-			S3: 	if (start)
-						ns = S3;
-					else
-						ns = S1;
+			S1: ns = start ? S2wait : S1;
+			
+			S2wait: ns = S2;
+				
+			S2: ns = (done) ? S3 : S2;
+			
+			S3: ns = start ? S3 : S1;
 		endcase
 	end // always_comb
 	
@@ -31,20 +26,19 @@ module bitCountingControl(in, start, reset, clk, done, ready, A_is_zero, inputA)
 		else 
 			ps <= ns;
 	end // always_ff
-	
-	//output assignments
-	assign inputA = in;
-	assign ready = (ps == S1);
-	assign A_is_zero = (ps == S2) & (~done);
+
+	assign switchInput = in;
+	assign A_is_zero = (currA == 0);
+	assign ready = (ps == S1) & ~start;
+	assign incr_result = (ps == S2) & (currA[0] == 1);
 	
 endmodule // controller
 
-
 module bitCountingControl_testbench();
-	logic [7:0] in, inputA;
-	logic reset, clk, start, done, ready, A_is_zero;
-	
-	bitCountingControl dut(.in, .start, .reset, .clk, .done, .ready, .A_is_zero, .inputA);
+	logic [7:0] in, currA, switchInput;
+	logic reset, clk, start, done, ready, incr_result, A_is_zero;
+
+	bitCountingControl dut(.in, .start, .reset, .clk, .done, .currA, .ready, .A_is_zero, .incr_result, .switchInput);
 	
 	parameter CLOCK_PERIOD = 100;
 	initial begin
@@ -53,11 +47,26 @@ module bitCountingControl_testbench();
 	end
 	
 	initial begin
-		reset <= 1;		@(posedge clk);
-		reset <= 0;	in <= 8'b00100100;	@(posedge clk);
-		start <= 0;		@(posedge clk);
-		start <= 1;		@(posedge clk);
-		repeat(20)		@(posedge clk);
-		$stop;	
+		reset <= 1;	@(posedge clk);
+		reset <= 0;	@(posedge clk);
+		in <= 8'b00100100; @(posedge clk);
+		// S1 -> S1
+		start <= 0; @(posedge clk);
+		// S1 -> S2wait
+		start <= 1; done <= 0; @(posedge clk);
+		start <= 0;	@(posedge clk);
+		// result = 1
+		currA <= 8'b0000101; @(posedge clk);
+		currA <= 8'b0000010; @(posedge clk);
+		// result = 2
+		currA <= 8'b0000001; @(posedge clk);
+		currA <= 8'b0000000; @(posedge clk);
+		// S2 -> S3
+		done <= 1; @(posedge clk);
+		// S3 -> S3
+		start <= 1; @(posedge clk);
+		// S3 -> S1
+		start <= 0; @(posedge clk);
+		$stop;
 	end
 endmodule

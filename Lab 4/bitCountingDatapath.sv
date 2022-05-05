@@ -1,39 +1,38 @@
-module bitCountingDatapath(inputA, A_zero, ready, result, done, clk);  
-	//port definitions
-	input logic A_zero, clk, ready;
-	input logic [7:0] inputA;
+module bitCountingDatapath(clk, ready, incr_result, A_is_zero, switchInput, result, done, currA); 
+	input logic clk, ready, incr_result, A_is_zero;
+	input logic [7:0] switchInput;
 	output logic [3:0] result;
 	output logic done;
+	output logic [7:0] currA;
 
-	logic [7:0] A;
-	
 	// datapath logic 
-	
 	always_ff @(posedge clk) begin
 		if(ready) begin
 			result <= 0;
 			done <= 0;
-			A <= inputA;
+			currA <= switchInput;
 		end
-		if(A_zero) begin
-			done = 1;
+		if(A_is_zero) begin
+			done <= 1;
 		end
-		else if(A[0] == 1) begin
+		else if(incr_result) begin
 			result <= result + 1;
 		end
 		else begin
-			A <= A >> 1;
+			currA <= currA >> 1;
 		end
 	end // always_ff
+	
+	
 endmodule // datapath
 
 
 module bitCountingDatapath_testbench();
-	logic A_zero, done, ready, clk;
+	logic clk, ready, incr_result, A_is_zero, done;
+	logic [7:0] switchInput, currA;
 	logic [3:0] result;
-	logic [7:0] inputA;
 	
-	bitCountingDatapath dut (.inputA, .A_zero, .ready, .result, .done, .clk);
+	bitCountingDatapath dut (.clk, .ready, .incr_result, .A_is_zero, .switchInput, .result, .done, .currA); 
 	
 	parameter CLOCK_PERIOD = 100;
 	initial begin
@@ -42,11 +41,10 @@ module bitCountingDatapath_testbench();
 	end
 	
 	initial begin
-		inputA <= 8'b00100100; @(posedge clk);
-		ready <= 1;	@(posedge clk);
-		ready <= 0; @(posedge clk);
-		A_zero <= 0; repeat(20) @(posedge clk);
-		A_zero <= 1; repeat(5) @(posedge clk);
+		switchInput <= 8'b00100100; @(posedge clk);
+		ready <= 1; switchInput <= 8'b00100100; @(posedge clk);
+		ready <= 0; switchInput <= 8'b00100100; @(posedge clk);
+		repeat(20) @(posedge clk);
 		$stop;
 	end
 endmodule
