@@ -8,8 +8,11 @@ add wave -noupdate /binarySearchDatapath_testbench/ready
 add wave -noupdate /binarySearchDatapath_testbench/increment
 add wave -noupdate /binarySearchDatapath_testbench/decrement
 add wave -noupdate /binarySearchDatapath_testbench/addr
+add wave -noupdate /binarySearchDatapath_testbench/dut/left
+add wave -noupdate /binarySearchDatapath_testbench/dut/right
+add wave -noupdate /binarySearchDatapath_testbench/dut/mid
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {973 ps} 0}
+WaveRestoreCursors {{Cursor 1} {616 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -25,4 +28,4 @@ configure wave -griddelta 2
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {1548555 ps} {1550077 ps}
+WaveRestoreZoom {338 ps} {869 ps}
