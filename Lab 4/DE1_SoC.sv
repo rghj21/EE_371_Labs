@@ -44,6 +44,7 @@ module DE1_SoC_testbench();
 		KEY[3] <= 1; @(posedge CLOCK_50);
 		KEY[3] <= 0; @(posedge CLOCK_50);
 		repeat(20) @(posedge CLOCK_50);
+		KEY[3] <= 1; @(posedge CLOCK_50);
 		$stop;
 	end
 endmodule

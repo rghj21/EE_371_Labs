@@ -42,16 +42,20 @@ module bitCounting(in, start, reset, clk, result, done);
 		else 
 			ps <= ns;
 		case(ns)
+			// load A 
 			S1: 	begin
 						result <= 0;
 						done <= 0;
 						A <= in;
 					end
+			// shifting right A state
 			S2: 	begin
 						if(A == 0)
 							done = 1;
+						// increment result when the first bit of A is 1 
 						else if (A[0] == 1)
 							result <= result + 1;
+						// right shift A by 1 bit	
 						A <= A >> 1;
 					end		
 		endcase
