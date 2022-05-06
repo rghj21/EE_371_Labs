@@ -1,10 +1,17 @@
+// Datapath module for binary search algorithm
+// takes 8-bit ramOut and currData, 1-bit clk, ready, increment, decrement, and unsucessful
+// outputs 1-bit fail, 5-bit left, right, and addr, 8-bit currData
+
 module binarySearchDatapath(ramOut, clk, currData, addr, ready, increment, decrement, left, right, unsuccessful, fail);
+	// port defintions
 	input logic clk, ready, increment, decrement, unsuccessful;
 	input logic [7:0] ramOut;
 	output logic fail;
 	output logic [4:0] addr; 
 	output logic [7:0] currData;
 	output logic [4:0] left, right;
+	
+	// internal logic
 	logic [4:0] mid, tempFail;
 	assign addr = mid;
 	assign currData = ramOut;

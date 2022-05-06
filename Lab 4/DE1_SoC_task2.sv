@@ -1,10 +1,12 @@
+// top level module for RAM, binary search algorithm and seg7 display
 module DE1_SoC_task2(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, SW, KEY, LEDR, CLOCK_50);
+	// port definitions
 	input logic [9:0] SW;
 	input logic [3:0] KEY;
 	input logic CLOCK_50;
 	output logic [9:0] LEDR;
 	output logic [6:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
-	
+	// internal logic 
 	logic correct, ready, increment, decrement, unsuccessful, fail;
 	assign reset = ~KEY[0];
 	assign start = ~KEY[3];
@@ -13,9 +15,13 @@ module DE1_SoC_task2(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, SW, KEY, LEDR, CLOCK_50
 	logic [4:0] addr, left, right;
 	logic [7:0] ramOut, currData;
 	logic [6:0] HEXOne, HEXZero;
+	// calls the all_seg7 module and displays the address if found on HEX0 and HEX1
 	all_seg7 seg (.loc(addr), .HEX0(HEXZero), .HEX1(HEXOne), .HEX2, .HEX3, .HEX4, .HEX5);
+	// calls the 32x8 RAM module
 	RAM32X8 ram (.address(addr), .clock(CLOCK_50), .data(0), .wren(0), .q(ramOut));
+	// calls the binarySearchDatapath module 
 	binarySearchDatapath datapath (.ramOut, .clk(CLOCK_50), .currData, .addr, .ready, .increment, .decrement, .left, .right, .unsuccessful, .fail);
+	// calls the binarySearchControl module
 	binarySearchControl control (.A(SW[7:0]), .currData, .start, .reset, .clk(CLOCK_50), 
 											.correct, .ready, .increment, .decrement, .left, .right, .unsuccessful);
 	always_comb begin

@@ -1,11 +1,21 @@
+// Controller module for binary search algorithm
+// takes 8-bit A and currData, 1-bit reset, clk, and start, 5-bit left and right
+// outputs 1-bit correct, ready, increment, decrement, and unsuccessful
+// The controller module determines the state of the algorithm circuit. 
 module binarySearchControl(A, currData, start, reset, clk, correct, ready, increment, decrement, left, right, unsuccessful);
+	// port definitions
 	input logic [7:0] A, currData;
 	input logic reset, clk, start;
 	input logic [4:0] left, right;
 	output logic correct, ready, increment, decrement, unsuccessful;
+	
+	// internal logic 
 	logic dataFound;
 
+	// define state names and variables
 	enum {S1, S2, S2Wait, S3} ps, ns;
+	
+	// next state logic
 	always_comb begin
 		case(ps)
 			S1: 	if (start)
@@ -23,23 +33,25 @@ module binarySearchControl(A, currData, start, reset, clk, correct, ready, incre
 					else
 						ns = S1;
 		endcase
-	end
-	
+	end // always_comb
+
 	always_ff @(posedge clk) begin
 		if (reset) 
 			ps <= S1;
 		else 
 			ps <= ns;
-	end
+	end // always_ff
 	
+	
+	// output assignments 
 	assign ready = (ps == S1);
 	assign dataFound = (currData == A);
-	assign unsuccessful = left > right;
-	assign increment = (ps == S2) & (~dataFound) & (currData < A);
-	assign decrement = (ps == S2) & (~dataFound) & (currData > A);
+	assign unsuccessful = left > right; // Nnable to find A
+	assign increment = (ps == S2) & (~dataFound) & (currData < A); // increment left value
+	assign decrement = (ps == S2) & (~dataFound) & (currData > A); // decrement right value
 	assign correct = (ps == S3);
 	
-endmodule
+endmodule // controller
 
 module binarySearchControl_testbench();
 	logic [7:0] A, currData;

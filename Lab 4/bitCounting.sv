@@ -3,7 +3,7 @@
 // outputs 4-bit result and 1-bit done
 // Bit-counting algorithm for counting all the 1s 
 // in the 8-bit input and returns the how many 1s
-// there are as well as a done signal.
+// there are and outputs a done signal.
 module bitCounting(in, start, reset, clk, result, done);
 	
 	// port definitions
