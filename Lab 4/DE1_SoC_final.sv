@@ -44,8 +44,8 @@ module DE1_SoC_final(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, SW, KEY, LEDR, CLOCK_50
 			HEXTASK2Z = HEXZero;
 		end
 		else begin
-			HEXTASK2O = 7'b1111111; 
-			HEXTASK2Z = 7'b1111111;
+			HEXTASK2O = 7'b1111111; // off
+			HEXTASK2Z = 7'b1111111; // off
 		end
 	end
 	// assign HEX0 and HEX1 for task 1 and 2

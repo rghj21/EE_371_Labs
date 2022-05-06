@@ -1,7 +1,8 @@
 // Datapath module for binary search algorithm
 // takes 8-bit ramOut and currData, 1-bit clk, ready, increment, decrement, and unsucessful
 // outputs 1-bit fail, 5-bit left, right, and addr, 8-bit currData
-
+// The datapath module performs the nesscary operations for the algorithm 
+// based on the signals from the controller module. 
 module binarySearchDatapath(ramOut, clk, currData, addr, ready, increment, decrement, left, right, unsuccessful, fail);
 	// port defintions
 	input logic clk, ready, increment, decrement, unsuccessful;
@@ -18,24 +19,27 @@ module binarySearchDatapath(ramOut, clk, currData, addr, ready, increment, decre
 	assign mid = (left + right) / 2;
 	
 	always_ff @(posedge clk) begin
+		// load condition
 		if (ready) begin
 			left <= 0;
 			right <= 5'b11111;
 			tempFail <= 0;
 		end
-		if (~tempFail | ~unsuccessful) begin
+		if (~tempFail | ~unsuccessful) begin // while loop - L <= R
 			if (increment)
-				if (left == 31)
+				// case when input A has larger value than greatest value in memory
+				if (left == 31) 
 					tempFail <= 1;
 				else
-					left <= mid + 1;
+					left <= mid + 1; // increment left
 			else if (decrement)
 				if (right == 0)
 					tempFail <= 1;
 				else
-					right <= mid - 1;
-		end	
+					right <= mid - 1; // decrement right 
+		end // always_ff	
 	end
+	// fail to find the target A
 	assign fail = unsuccessful | tempFail;
 endmodule
 

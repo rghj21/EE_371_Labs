@@ -1,7 +1,8 @@
 // Controller module for binary search algorithm
 // takes 8-bit A and currData, 1-bit reset, clk, and start, 5-bit left and right
 // outputs 1-bit correct, ready, increment, decrement, and unsuccessful
-// The controller module determines the state of the algorithm circuit. 
+// The controller module determines the state of the algorithm circuit
+// and which operation the datapath needs to perform. 
 module binarySearchControl(A, currData, start, reset, clk, correct, ready, increment, decrement, left, right, unsuccessful);
 	// port definitions
 	input logic [7:0] A, currData;
@@ -22,6 +23,7 @@ module binarySearchControl(A, currData, start, reset, clk, correct, ready, incre
 						ns = S2Wait;
 					else 
 						ns = S1;
+			// wait state to avoid clock delay			
 			S2Wait:
 					ns =  S2;
 			S2: 	if (dataFound) 
@@ -44,12 +46,12 @@ module binarySearchControl(A, currData, start, reset, clk, correct, ready, incre
 	
 	
 	// output assignments 
-	assign ready = (ps == S1);
+	assign ready = (ps == S1); // ready signal
 	assign dataFound = (currData == A);
-	assign unsuccessful = left > right; // Nnable to find A
+	assign unsuccessful = left > right; // Unable to find A
 	assign increment = (ps == S2) & (~dataFound) & (currData < A); // increment left value
 	assign decrement = (ps == S2) & (~dataFound) & (currData > A); // decrement right value
-	assign correct = (ps == S3);
+	assign correct = (ps == S3); // if we find A
 	
 endmodule // controller
 

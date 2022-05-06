@@ -19,9 +19,7 @@ module DE1_SoC(HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, SW, KEY, LEDR, CLOCK_50);
 	// calls the hex display module and determines the value of the all HEX based on result value of bit counter 
 	task1HexDisplay hex (.result(out), .HEX0);
 	assign LEDR[9] = done;
-	
-	
-	
+
 endmodule
 
 module DE1_SoC_testbench();
