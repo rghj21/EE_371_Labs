@@ -6,8 +6,6 @@ module task1HexDisplay(result, HEX0);
 	input logic [3:0] result;
 	output logic [6:0] HEX0;
 	
-	// HEX1 - HEX5 are turned off
-	
 	//determines value of HEX0 based on input
 	always_comb begin 
 		case(result)
