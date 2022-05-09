@@ -51,35 +51,37 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	assign yStep = (yStart < yEnd) ? 1'b1 : 1'b0;
 	always_comb begin
 		if (currX < xEnd) begin
-			nextX = currX + 1'b1;
+			currX = currX + 1'b1;
 			if (isSteep) begin
-				nextX = currY;
-				nextY = currX;
+				currX = currY;
+				currY = currX;
 			end 
 			if (error >= 0) begin
 				if (yStep)
-					nextY = currY + 1'b1;
+					currY = currY + 1'b1;
 				else
-					nextY = currY - 1'b1;
+					currY = currY - 1'b1;
 			end
 		end else begin
-			nextY = currY;
-			nextX = currX;
+			currY = currY;
+			currX = currX;
 		end
 	end
 	
 	always_comb begin
 		x = currX;
 		y = currY;
-		error <= -deltaX/2;
+		
 	end
 		
 	always_ff @(posedge clk) begin
 		if(reset) begin
 			currX <= xStart;
 			currY <= yStart;
+			error <= -deltaX/2;
 		end 
 		else begin
+			curr_x <
 			if(error < 0)
 				error <= error + deltaY;
 			else
@@ -89,6 +91,7 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	
 endmodule  // line_drawer
 
+//`timescale 1ps / 1ns
 module line_drawer_testbench();
 	logic [10:0]x0, x1, y0, y1, x, y;
 	logic clk, reset, done;
@@ -101,32 +104,32 @@ module line_drawer_testbench();
 	end
 	
 	initial begin
-		reset = 1; #100;
-		reset = 0; #100;
+		reset = 1; @(posedge clk);
+		reset = 0; @(posedge clk);
 		//straight line
-		x0 = 0; x1= 0; y0=0; y1=8; reset = 1; #100;
-		reset = 0; #1000;
-		//down line
-		x0 = 0; x1= 8; y0=0; y1=0; reset = 1; #100;
-		reset = 0; #1000;
-		//straight line (flipped points)
-		x0 = 0; x1= 0; y1=0; y0=8; reset = 1; #100;
-		reset = 0; #1000;
-		//down line (flipped points)
-		x1 = 0; x0= 8; y0=0; y1=0; reset = 1; #100;
-		reset = 0; #1000;
-		//diagonal from origin point
-		x0 = 0; x1= 3; y0=0; y1=9; reset = 1; #100;
-		reset = 0; #1000;
-		//diagonal from origin point
-		x0 = 0; x1= 9; y0=0; y1=3; reset = 1; #100;
-		reset = 0; #1000;
-		//diagonal line
-		x0 = 4; x1= 42; y0=3; y1=59; reset = 1; #100;
-		reset = 0; #6000;
-		//hard case
-		x0 = 123; x1= 234; y0=345; y1=456; reset = 1; #100;
-		reset = 0; #20000;
+		x0 = 0; x1= 0; y0=0; y1=8;  @(posedge clk);
+		reset = 1;		@(posedge clk);
+		reset = 0;		@(posedge clk);
+		repeat(20); 	@(posedge clk);
+		
+//		//down line
+//		x0 = 0; x1= 8; y0=0; y1=0; @(posedge clk);
+//		reset = 0; #1000;
+
+//		//straight line (flipped points)
+//		x0 = 0; x1= 0; y1=0; y0=8; @(posedge clk);
+
+//		//down line (flipped points)
+//		x1 = 0; x0= 8; y0=0; y1=0; @(posedge clk);
+
+//		//diagonal from origin point
+//		x0 = 0; x1= 3; y0=0; y1=9; @(posedge clk);
+
+//		//diagonal from origin point
+//		x0 = 0; x1= 9; y0=0; y1=3; @(posedge clk);
+
+//		//diagonal line
+//		x0 = 4; x1= 42; y0=3; y1=59; @(posedge clk);
 		$stop;
 	end
 	

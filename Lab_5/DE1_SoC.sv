@@ -45,7 +45,7 @@ module DE1_SoC (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW, CLOCK_50,
 	
 	logic [10:0] x0, y0, x1, y1, x, y;
 	logic reset;
-	assign reset = ~KEY[0]
+	assign reset = ~KEY[0];
 	VGA_framebuffer fb (
 		.clk50			(CLOCK_50), 
 		.reset			, 
