@@ -27,7 +27,7 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	 * such as error and direction.
 	 */
 	logic signed [11:0] error;  // example - feel free to change/delete
-	logic [10:0] deltaX, deltaY, absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, tempY ,outX ,outY;
+	logic [10:0] deltaX, deltaY, absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, tempY ,currX ,currY, nextX, nextY;
 	logic isSteep, yStep;
 	
 	assign absX = (x0 > x1) ? (x0 - x1) : (x1 - x0);
@@ -46,46 +46,88 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 		yEnd = (xFirst > xSecond) ? yFirst : ySecond;
 	end
 	
-	// int deltax = x1-x0 
-	assign deltaX = xEnd - xStart;
-   // int deltay = abs(y1-y0) 
-	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd - yStart;
-	// int error = -(deltax/2) 
-	assign error = -(deltaX/2);
-   // int y = y0 
-	assign tempY = yStart;
-	// if y0 < y1 then y_step = 1 else y_step = -1
+	assign deltaX = xStart - xEnd;
+	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd -yStart;
 	assign yStep = (yStart < yEnd) ? 1'b1 : 1'b0;
-	
 	always_comb begin
-		if (xStart < xEnd) begin
+		if (currX < xEnd) begin
+			nextX = currX + 1'b1;
 			if (isSteep) begin
-				outX = yStart;
-				outY = xStart;
-			end else begin
-				outX = xStart;
-				outY = yStart;
-			end
-			error = error + deltaY;
+				nextX = currY;
+				nextY = currX;
+			end 
 			if (error >= 0) begin
 				if (yStep)
-					outY = outY + 1'b1;
+					nextY = currY + 1'b1;
 				else
-					outY = outY - 1'b1;
-				error = error - deltaX;
+					nextY = currY - 1'b1;
 			end
-			xStart = xStart + 1'b1;
+		end else begin
+			nextY = currY;
+			nextX = currX;
 		end
 	end
 	
 	always_comb begin
-		x = outX;
-		y = outY;
+		x = currX;
+		y = currY;
+		error <= -deltaX/2;
 	end
 		
-
 	always_ff @(posedge clk) begin
-		// YOUR CODE HERE
-	end  // always_ff
+		if(reset) begin
+			currX <= xStart;
+			currY <= yStart;
+		end 
+		else begin
+			if(error < 0)
+				error <= error + deltaY;
+			else
+				error <= error + deltaY - deltaX;
+		end
+	end	// always_ff
 	
 endmodule  // line_drawer
+
+module line_drawer_testbench();
+	logic [10:0]x0, x1, y0, y1, x, y;
+	logic clk, reset, done;
+	line_drawer dut (.clk, .reset, .x0, .y0, .x1, .y1, .x, .y, .done);
+	
+	parameter CLOCK_PERIOD=100;  
+	initial begin   
+	  clk <= 0;  
+	  forever #(CLOCK_PERIOD/2) clk <= ~clk; // Forever toggle the clock
+	end
+	
+	initial begin
+		reset = 1; #100;
+		reset = 0; #100;
+		//straight line
+		x0 = 0; x1= 0; y0=0; y1=8; reset = 1; #100;
+		reset = 0; #1000;
+		//down line
+		x0 = 0; x1= 8; y0=0; y1=0; reset = 1; #100;
+		reset = 0; #1000;
+		//straight line (flipped points)
+		x0 = 0; x1= 0; y1=0; y0=8; reset = 1; #100;
+		reset = 0; #1000;
+		//down line (flipped points)
+		x1 = 0; x0= 8; y0=0; y1=0; reset = 1; #100;
+		reset = 0; #1000;
+		//diagonal from origin point
+		x0 = 0; x1= 3; y0=0; y1=9; reset = 1; #100;
+		reset = 0; #1000;
+		//diagonal from origin point
+		x0 = 0; x1= 9; y0=0; y1=3; reset = 1; #100;
+		reset = 0; #1000;
+		//diagonal line
+		x0 = 4; x1= 42; y0=3; y1=59; reset = 1; #100;
+		reset = 0; #6000;
+		//hard case
+		x0 = 123; x1= 234; y0=345; y1=456; reset = 1; #100;
+		reset = 0; #20000;
+		$stop;
+	end
+	
+endmodule 
