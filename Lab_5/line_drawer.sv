@@ -27,7 +27,7 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	 * such as error and direction.
 	 */
 	logic signed [11:0] error;  // example - feel free to change/delete
-	logic [10:0] deltaX, deltaY, absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, currX, currY;
+	logic [10:0] deltaX, deltaY, absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, tempY ,currX ,currY, nextX, nextY;
 	logic isSteep, yStep;
 	
 	assign absX = (x0 > x1) ? (x0 - x1) : (x1 - x0);
@@ -49,45 +49,45 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	assign deltaX = xStart - xEnd;
 	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd -yStart;
 	assign yStep = (yStart < yEnd) ? 1'b1 : 1'b0;
+	always_comb begin
+		if (currX < xEnd) begin
+			currX = currX + 1'b1;
+			if (isSteep) begin
+				currX = currY;
+				currY = currX;
+			end 
+			if (error >= 0) begin
+				if (yStep)
+					currY = currY + 1'b1;
+				else
+					currY = currY - 1'b1;
+			end
+		end else begin
+			currY = currY;
+			currX = currX;
+		end
+	end
 	
-	
+	always_comb begin
+		x = currX;
+		y = currY;
+		
+	end
 		
 	always_ff @(posedge clk) begin
 		if(reset) begin
 			currX <= xStart;
 			currY <= yStart;
-			error <= (-1) * deltaX / 2;
+			error <= -deltaX/2;
 		end 
 		else begin
-			if (currX < xEnd) begin
-				currX <= currX + 1'b1;
-				if (isSteep) begin
-					currX <= currY;
-					currY <= currX;
-				end 
+			curr_x <
+			if(error < 0)
 				error <= error + deltaY;
-				if (error >= 0) begin
-					if (yStep)
-						currY <= currY + 1'b1;
-					else begin
-						currY <= currY - 1'b1;
-						error <= error - deltaX;
-					end
-				end else begin
-					currY <= currY;
-					currX <= currX;
-				end
-			end else begin
-				currY <= currY;
-				currX <= currX;
-			end
+			else
+				error <= error + deltaY - deltaX;
 		end
 	end	// always_ff
-	
-	always_comb begin
-		x = currX;
-		y = currY;
-	end
 	
 endmodule  // line_drawer
 
