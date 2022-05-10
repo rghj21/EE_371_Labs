@@ -27,7 +27,8 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	 * such as error and direction.
 	 */
 	logic signed [11:0] error;  // example - feel free to change/delete
-	logic [10:0] deltaX, deltaY, absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, tempY ,currX ,currY, nextX, nextY;
+	logic [10:0] absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, xCounter, outX, outY;
+	logic signed [10:0]  deltaX, deltaY, currX, currY;
 	logic isSteep, yStep;
 	
 	assign absX = (x0 > x1) ? (x0 - x1) : (x1 - x0);
@@ -46,48 +47,76 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 		yEnd = (xFirst > xSecond) ? yFirst : ySecond;
 	end
 	
-	assign deltaX = xStart - xEnd;
+	assign deltaX = xEnd - xStart;
 	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd -yStart;
 	assign yStep = (yStart < yEnd) ? 1'b1 : 1'b0;
-	always_comb begin
-		if (currX < xEnd) begin
-			currX = currX + 1'b1;
-			if (isSteep) begin
-				currX = currY;
-				currY = currX;
-			end 
-			if (error >= 0) begin
-				if (yStep)
-					currY = currY + 1'b1;
-				else
-					currY = currY - 1'b1;
-			end
-		end else begin
-			currY = currY;
-			currX = currX;
-		end
-	end
 	
-	always_comb begin
-		x = currX;
-		y = currY;
-		
-	end
+	
 		
 	always_ff @(posedge clk) begin
 		if(reset) begin
+			xCounter <= xStart;
 			currX <= xStart;
 			currY <= yStart;
-			error <= -deltaX/2;
+			error <= (-1) * deltaX / 2;
 		end 
 		else begin
-			curr_x <
-			if(error < 0)
+			if (currX <= xEnd) begin
+				if (isSteep) begin
+					outX <= currY;
+					outY <= currX;
+				end else begin
+					outY <= currY;
+					outX <= currX;
+				end
 				error <= error + deltaY;
-			else
-				error <= error + deltaY - deltaX;
+				if (error >= 0) begin
+					if (yStep)
+						currY <= currY + 1'b1;
+					else begin
+						currY <= currY - 1'b1;
+					end
+					error <= error - deltaX;
+				end
+				currX <= currX + 1'b1;
+			end
 		end
 	end	// always_ff
+	
+	always_comb begin
+		x = outX;
+		y = outY;
+	end
+
+//	always_ff @(posedge clk) begin
+//		if(reset) begin
+//			xCounter <= xStart;
+//			currX <= xStart;
+//			currY <= yStart;
+//			error <= (-1) * deltaX / 2;
+//		end 
+//		else begin
+//			if (currX <= xEnd) begin
+//				if (isSteep) begin
+//					x <= currY;
+//					y <= currX;
+//				end else begin
+//					y <= currY;
+//					x <= currX;
+//				end
+//				error <= error + deltaY;
+//				if (error >= 0) begin
+//					if (yStep)
+//						currY <= currY + 1'b1;
+//					else begin
+//						currY <= currY - 1'b1;
+//					end
+//					error <= error - deltaX;
+//				end
+//				currX <= currX + 1'b1;
+//			end
+//		end
+//	end	// always_ff
 	
 endmodule  // line_drawer
 
@@ -104,17 +133,18 @@ module line_drawer_testbench();
 	end
 	
 	initial begin
-		reset = 1; @(posedge clk);
-		reset = 0; @(posedge clk);
-		//straight line
-		x0 = 0; x1= 0; y0=0; y1=8;  @(posedge clk);
-		reset = 1;		@(posedge clk);
-		reset = 0;		@(posedge clk);
-		repeat(20); 	@(posedge clk);
+		// horizontal line
+//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 1;  @(posedge clk);
+//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 0; repeat(20) @(posedge clk);
 		
-//		//down line
-//		x0 = 0; x1= 8; y0=0; y1=0; @(posedge clk);
-//		reset = 0; #1000;
+		// vertical line
+//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 1;  @(posedge clk);
+//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 0; repeat(20) @(posedge clk);
+		
+		// diagonal from origin
+		x0 = 0; x1= 4; y0=0; y1=8; reset = 1;  @(posedge clk);
+		x0 = 0; x1= 4; y0=0; y1=8; reset = 0; repeat(20) @(posedge clk);
+		
 
 //		//straight line (flipped points)
 //		x0 = 0; x1= 0; y1=0; y0=8; @(posedge clk);
