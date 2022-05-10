@@ -133,15 +133,18 @@ module line_drawer_testbench();
 	end
 	
 	initial begin
-//		reset = 1; @(posedge clk);
-//		reset = 0; @(posedge clk);
-		//straight line
-		x0 = 0; x1= 0; y0=0; y1=8; reset = 1;  @(posedge clk);
-		x0 = 0; x1= 0; y0=0; y1=8; reset = 0; repeat(20) @(posedge clk);
+		// horizontal line
+//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 1;  @(posedge clk);
+//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 0; repeat(20) @(posedge clk);
 		
-//		//down line
-//		x0 = 0; x1= 8; y0=0; y1=0; @(posedge clk);
-//		reset = 0; #1000;
+		// vertical line
+//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 1;  @(posedge clk);
+//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 0; repeat(20) @(posedge clk);
+		
+		// diagonal from origin
+		x0 = 0; x1= 4; y0=0; y1=8; reset = 1;  @(posedge clk);
+		x0 = 0; x1= 4; y0=0; y1=8; reset = 0; repeat(20) @(posedge clk);
+		
 
 //		//straight line (flipped points)
 //		x0 = 0; x1= 0; y1=0; y0=8; @(posedge clk);
