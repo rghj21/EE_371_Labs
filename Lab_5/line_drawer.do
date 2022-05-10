@@ -21,16 +21,36 @@ radix define 7segHex {
 }
 quietly WaveActivateNextPane {} 0
 add wave -noupdate /line_drawer_testbench/clk
-add wave -noupdate -radix unsigned /line_drawer_testbench/x0
-add wave -noupdate -radix unsigned /line_drawer_testbench/x1
-add wave -noupdate -radix unsigned /line_drawer_testbench/y0
-add wave -noupdate -radix unsigned /line_drawer_testbench/y1
-add wave -noupdate -radix unsigned /line_drawer_testbench/x
-add wave -noupdate -radix unsigned /line_drawer_testbench/y
+add wave -noupdate -radix decimal /line_drawer_testbench/x
+add wave -noupdate -radix decimal /line_drawer_testbench/y
 add wave -noupdate /line_drawer_testbench/reset
 add wave -noupdate /line_drawer_testbench/done
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/x0
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/y0
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/x1
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/y1
+add wave -noupdate /line_drawer_testbench/dut/done
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/x
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/y
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/currX
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/currY
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/error
+add wave -noupdate -radix decimal -childformat {{{/line_drawer_testbench/dut/deltaX[10]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[9]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[8]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[7]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[6]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[5]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[4]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[3]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[2]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[1]} -radix decimal} {{/line_drawer_testbench/dut/deltaX[0]} -radix decimal}} -subitemconfig {{/line_drawer_testbench/dut/deltaX[10]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[9]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[8]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[7]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[6]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[5]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[4]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[3]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[2]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[1]} {-height 15 -radix decimal} {/line_drawer_testbench/dut/deltaX[0]} {-height 15 -radix decimal}} /line_drawer_testbench/dut/deltaX
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/deltaY
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/absX
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/absY
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/xFirst
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/xSecond
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/yFirst
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/ySecond
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/xStart
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/xEnd
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/yStart
+add wave -noupdate -radix decimal /line_drawer_testbench/dut/yEnd
+add wave -noupdate /line_drawer_testbench/dut/isSteep
+add wave -noupdate /line_drawer_testbench/dut/yStep
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {397 ps} 0}
+WaveRestoreCursors {{Cursor 1} {34 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -46,4 +66,4 @@ configure wave -griddelta 2
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {578 ps}
+WaveRestoreZoom {0 ps} {2153 ps}
