@@ -44,8 +44,9 @@ module DE1_SoC (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW, CLOCK_50,
 	assign LEDR[8:0] = SW[8:0];
 	
 	logic [10:0] x0, y0, x1, y1, x, y;
-	logic reset;
+	logic reset, done;
 	assign reset = ~KEY[0];
+	assign done = LEDR[9];
 	VGA_framebuffer fb (
 		.clk50			(CLOCK_50), 
 		.reset			, 
@@ -62,7 +63,6 @@ module DE1_SoC (HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW, CLOCK_50,
 		.VGA_BLANK_n	(VGA_BLANK_N), 
 		.VGA_SYNC_n		(VGA_SYNC_N));
 				
-	logic done;
 
 	line_drawer lines (.clk(CLOCK_50), .reset(reset),.x0, .y0, .x1, .y1, .x, .y, .done);
 	
