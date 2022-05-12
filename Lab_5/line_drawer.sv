@@ -27,7 +27,7 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	 * such as error and direction.
 	 */
 	logic signed [11:0] error;  // example - feel free to change/delete
-	logic [10:0] absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, xCounter, outX, outY;
+	logic [10:0] absX, absY, xFirst, xSecond, yFirst, ySecond, xStart, xEnd, yStart, yEnd, outX, outY;
 	logic signed [10:0]  deltaX, deltaY, currX, currY;
 	logic isSteep, yStep;
 	
@@ -48,14 +48,12 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 	end
 	
 	assign deltaX = xEnd - xStart;
-	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd -yStart;
+	assign deltaY = (yStart > yEnd) ? yStart - yEnd : yEnd - yStart;
 	assign yStep = (yStart < yEnd) ? 1'b1 : 1'b0;
-	
-	
-		
+
 	always_ff @(posedge clk) begin
 		if(reset) begin
-			xCounter <= xStart;
+			done <= 0;
 			currX <= xStart;
 			currY <= yStart;
 			error <= (-1) * deltaX / 2;
@@ -69,17 +67,19 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 					outY <= currY;
 					outX <= currX;
 				end
-				error <= error + deltaY;
+				//error <= error + deltaY;
 				if (error >= 0) begin
 					if (yStep)
 						currY <= currY + 1'b1;
 					else begin
 						currY <= currY - 1'b1;
 					end
-					error <= error - deltaX;
-				end
+					error <= error - deltaX + deltaY;
+				end else 
+					error <= error + deltaY;
 				currX <= currX + 1'b1;
-			end
+			end else
+				done <= 1;
 		end
 	end	// always_ff
 	
@@ -87,36 +87,6 @@ module line_drawer(clk, reset, x0, y0, x1, y1, x, y, done);
 		x = outX;
 		y = outY;
 	end
-
-//	always_ff @(posedge clk) begin
-//		if(reset) begin
-//			xCounter <= xStart;
-//			currX <= xStart;
-//			currY <= yStart;
-//			error <= (-1) * deltaX / 2;
-//		end 
-//		else begin
-//			if (currX <= xEnd) begin
-//				if (isSteep) begin
-//					x <= currY;
-//					y <= currX;
-//				end else begin
-//					y <= currY;
-//					x <= currX;
-//				end
-//				error <= error + deltaY;
-//				if (error >= 0) begin
-//					if (yStep)
-//						currY <= currY + 1'b1;
-//					else begin
-//						currY <= currY - 1'b1;
-//					end
-//					error <= error - deltaX;
-//				end
-//				currX <= currX + 1'b1;
-//			end
-//		end
-//	end	// always_ff
 	
 endmodule  // line_drawer
 
@@ -134,32 +104,44 @@ module line_drawer_testbench();
 	
 	initial begin
 		// horizontal line
-//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 1;  @(posedge clk);
-//		x0 = 0; x1= 4; y0=0; y1 = 0; reset = 0; repeat(20) @(posedge clk);
+//		x0 = 0; x1 = 20; y0 = 0; y1 = 0; reset = 1;  @(posedge clk);
+//		x0 = 0; x1 = 20; y0 = 0; y1 = 0; reset = 0; repeat(30) @(posedge clk);
 		
 		// vertical line
-//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 1;  @(posedge clk);
-//		x0 = 0; x1= 0; y0=0; y1 = 8; reset = 0; repeat(20) @(posedge clk);
+//		x0 = 0; x1 = 0; y0 = 0; y1 = 20; reset = 1;  @(posedge clk);
+//		x0 = 0; x1 = 0; y0 = 0; y1 = 20; reset = 0; repeat(30) @(posedge clk);
 		
-		// diagonal from origin
-		x0 = 0; x1= 4; y0=0; y1=8; reset = 1;  @(posedge clk);
-		x0 = 0; x1= 4; y0=0; y1=8; reset = 0; repeat(20) @(posedge clk);
-		
+		// right down line gradual case
+		x0 = 0; x1 = 9; y0 = 0; y1 = 4; reset = 1;  @(posedge clk);
+		x0 = 0; x1 = 9; y0 = 0; y1 = 4; reset = 0; repeat(20) @(posedge clk);
 
-//		//straight line (flipped points)
-//		x0 = 0; x1= 0; y1=0; y0=8; @(posedge clk);
+		// right down line steep case 
+		x0 = 0; x1 = 4; y0 = 0; y1 = 9; reset = 1;  @(posedge clk);
+		x0 = 0; x1 = 4; y0 = 0; y1 = 9; reset = 0; repeat(20) @(posedge clk);
 
-//		//down line (flipped points)
-//		x1 = 0; x0= 8; y0=0; y1=0; @(posedge clk);
+		// right up line gradual case
+		x0 = 0; x1 = 9; y0 = 4; y1 = 0; reset = 1;  @(posedge clk);
+		x0 = 0; x1 = 9; y0 = 4; y1 = 0; reset = 0; repeat(20) @(posedge clk);
 
-//		//diagonal from origin point
-//		x0 = 0; x1= 3; y0=0; y1=9; @(posedge clk);
+		// right up line steep case broken
+		x0 = 0; x1 = 4; y0 = 9; y1 = 0; reset = 1;  @(posedge clk);
+		x0 = 0; x1 = 4; y0 = 9; y1 = 0; reset = 0; repeat(20) @(posedge clk);
 
-//		//diagonal from origin point
-//		x0 = 0; x1= 9; y0=0; y1=3; @(posedge clk);
+		// left up line steep case
+		x0 = 4; x1 = 0; y0 = 9; y1 = 0; reset = 1;  @(posedge clk);
+		x0 = 4; x1 = 0; y0 = 9; y1 = 0; reset = 0; repeat(20) @(posedge clk);
 
-//		//diagonal line
-//		x0 = 4; x1= 42; y0=3; y1=59; @(posedge clk);
+		// left up line gradual case
+		x0 = 9; x1 = 0; y0 = 4; y1 = 0; reset = 1;  @(posedge clk);
+		x0 = 9; x1 = 0; y0 = 4; y1 = 0; reset = 0; repeat(20) @(posedge clk);
+
+		// left down line steep case
+		x0 = 4; x1 = 0; y0 = 0; y1 = 9; reset = 1;  @(posedge clk);
+		x0 = 4; x1 = 0; y0 = 0; y1 = 9; reset = 0; repeat(20) @(posedge clk);
+
+		// left down line gradual case
+		x0 = 9; x1 = 0; y0 = 0; y1 = 4; reset = 1;  @(posedge clk);
+		x0 = 9; x1 = 0; y0 = 0; y1 = 4; reset = 0; repeat(20) @(posedge clk);
 		$stop;
 	end
 	
